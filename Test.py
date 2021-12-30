@@ -1,17 +1,23 @@
 #!/bin/python3
 import os
+import sys
+from time import sleep
 
 yes_answer=["o", "y", "oui", "yes"]
 space_to=['-', '_', '']
 
-
+def msg_print(text):
+    for char in text:
+        sleep(0.05)
+        sys.stdout.write(char)
+        sys.stdout.flush()
 def ask_dir():
     place=os.getcwd()
     choix_rep=str(input(f'Votre position :{place}\n Voulez-vous changer de répertoire [O/N] ?'))
     if choix_rep.lower() in yes_answer:
         location = str(input("Spécifiez le répertoire voulu :"))
     else :
-        location=os.getcwd()
+        location=str(os.getcwd())
     os.chdir(location)
     return location
 
@@ -58,8 +64,8 @@ def rename_file(directory) :
 
 print(f'Bienvenue :')
 directory = os.listdir(ask_dir())
-
-choix_rep_rename=str(input(f'Voulez-vous changer les noms des fichier du répertoire [O/N] ?'))
+msg_print("Voulez-vous renomer des noms de fichiers ? [O/N] -->")
+choix_rep_rename=str(input())
 if choix_rep_rename in yes_answer:
     print('\r')
     rename_file(directory)
