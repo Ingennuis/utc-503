@@ -78,20 +78,21 @@ def rename_file(directory) : #Fonctione de renommage, inclu les question
         replace_caracter=str(input("Remplacer par :"))
     else:
         ext_to_replace=''
+        replace_caracter=''
     os.system('clear')
     msg_print("Voulez-vous remplacer les espaces dans les noms de fichier [O/N] ?")
     choix_rep_space=str(input())
     if choix_rep_space.lower() in yes_answer :
-        check=0
-        while check==0:
+        check=False
+        while check==False:
             try : #Casse si l'input n'est pas un chiffre
                 os.system('clear')
                 number_caracter=int(input(f'Remplacer les espaces dans les noms par : \n \t1: -\n\t2: _\n\t3: Rien \n Faites votre choix, tapez 1, 2 ou 3 (lettre :quit):'))-1
                 if number_caracter in range(3):
-                    check=1
+                    check=True
                 else :
                     msg_print_error(" Veuillez entrez 1, 2 ou 3 !", '5')
-                    check=0
+                    check=False
             except :
                 print('Annulé')
                 quit()
@@ -99,11 +100,11 @@ def rename_file(directory) : #Fonctione de renommage, inclu les question
     os.system('clear')
     msg_print_exec('OK ----> Lancement')
     for file in directory : #Execute les actions demandees
-        if choix_rep_ext and choix_rep_space in yes_answer and ' ' and ext_to_replace in file :
-            file_new_name = str(replace_extension(file, ext_to_replace, replace_caracter))
-            file_last_name = str(replace_space(file_new_name, space_to[number_caracter]))
-            os.rename(file, file_last_name)
-            msg_print(f'{file} --> {file_new_name} --> {file_last_name}\n')
+        if (choix_rep_ext in yes_answer and choix_rep_space in yes_answer) and (' 'in file and ext_to_replace in file) :
+                file_new_name = str(replace_extension(file, ext_to_replace, replace_caracter))
+                file_last_name = str(replace_space(file_new_name, space_to[number_caracter]))
+                os.rename(file, file_last_name)
+                msg_print(f'{file} --> {file_new_name} --> {file_last_name}\n')
         else :
             if ext_to_replace in file and choix_rep_ext in yes_answer :
                 file_new_name = str(replace_extension(file, ext_to_replace, replace_caracter))
@@ -113,9 +114,31 @@ def rename_file(directory) : #Fonctione de renommage, inclu les question
                 file_new_name = str(replace_space(file, space_to[number_caracter]))
                 os.rename(file, file_new_name)
                 msg_print(f'{file} --> {file_new_name}\n')
+
+def sort_by_ext():
+    print_indir()
+    msg_print('Trier les fichiers et créer des dossiers de rangement dans ce rerpetoire ?')
+    choix_rep_dest=str(input())
+    if choix_rep_dest in yes_answer:
+        rep_dest=os.getcwd()
+    else :
+        check = False
+        while check == False:
+            msg_print('Entrez le repertoire de destination :')
+            rep_dest=str(input())
+            try:
+                os.path.isdir(rep_dest)
+                check = True
+            except:
+                msg_print_error("Le repertoire que vous avez rentré n'est pas valide !", "7")
+            check= False
+    
             
-
-
+def extension(name):
+    ext='.'.join(name.split('.')[1:])
+    ext = ext if ext else None
+    return ext
+    
 
 #---main---
 os.system('clear')#On passe un coup de balai
