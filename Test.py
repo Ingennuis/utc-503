@@ -6,6 +6,9 @@ from time import sleep
 yes_answer=["o", "y", "oui", "yes"]
 space_to=['-', '_', '']
 
+def clean():
+    os.system('clear' if os.name =='posix' else 'cls')
+        
 def msg_print(text): #Affiche un message comme si il etait tape
     for char in text:
         sleep(0.01)
@@ -14,7 +17,7 @@ def msg_print(text): #Affiche un message comme si il etait tape
         
 def msg_print_error(text, time): #Affiche un message en rouge clignotant
     for i in range(int(time)):
-        os.system('clear')
+        clean()
         sleep(0.3)
         sys.stdout.write(f'\r\033[91m{text}\033[0m')
         sleep(0.3)
@@ -52,7 +55,7 @@ def ask_dir(): #Damande et rend actif le repertoire
         location=str(os.getcwd())
         os.chdir(location)
     
-    os.system('clear')
+    clean()
     print(f"Répertoire actif : \033[92m{location} \033[0m ") #Affiche en vert.
     return location
 
@@ -79,14 +82,14 @@ def rename_file(directory) : #Fonctione de renommage, inclu les question
     else:
         ext_to_replace=''
         replace_caracter=''
-    os.system('clear')
+    clean()
     msg_print("Voulez-vous remplacer les espaces dans les noms de fichier [O/N] ?")
     choix_rep_space=str(input())
     if choix_rep_space.lower() in yes_answer :
         check=False
         while check==False:
             try : #Casse si l'input n'est pas un chiffre
-                os.system('clear')
+                clean()
                 number_caracter=int(input(f'Remplacer les espaces dans les noms par : \n \t1: -\n\t2: _\n\t3: Rien \n Faites votre choix, tapez 1, 2 ou 3 (lettre :quit):'))-1
                 if number_caracter in range(3):
                     check=True
@@ -97,8 +100,8 @@ def rename_file(directory) : #Fonctione de renommage, inclu les question
                 print('Annulé')
                 quit()
                 
-    os.system('clear')
-    msg_print_exec('OK ----> Lancement')
+    clean()
+    msg_print_exec('OK ...')
     for file in directory : #Execute les actions demandees
         if (choix_rep_ext in yes_answer and choix_rep_space in yes_answer) and (' 'in file and ext_to_replace in file) :
                 file_new_name = str(replace_extension(file, ext_to_replace, replace_caracter))
@@ -141,7 +144,7 @@ def extension(name):
     
 
 #---main---
-os.system('clear')#On passe un coup de balai
+clean()#On passe un coup de balai
 
 msg_print('Bienvenue !\n')#On dit bonjour, parcequ'on est poli
 
@@ -149,7 +152,7 @@ directory = os.listdir(ask_dir()) #On prend les fichiers du repertoire
 
 msg_print("Voulez-vous renommer des noms de fichiers [O/N] ? ")
 choix_rep_rename=str(input())
-os.system('clear')
+clean()
 if choix_rep_rename in yes_answer:
     print_indir()
     rename_file(directory)
