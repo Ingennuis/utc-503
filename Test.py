@@ -1,15 +1,17 @@
 #!/bin/python3
-import os
-import sys
+import os, shutil, sys
 from time import sleep
+
 
 yes_answer=["o", "y", "oui", "yes"]
 space_to=['-', '_', '']
-
+rep_sort_name=['Images', 'Videos', 'Documents', 'Musiques']
+ext_image=['jpeg', 'png', 'jpg', 'gif', 'tiff']
+ext_video=['avi', 'mpg', 'mp4', 'wmv', 'mov', 'flv']
 def clean():
     os.system('clear' if os.name =='posix' else 'cls')
         
-def msg_print(text): #Affiche un message comme si il etait tape
+def msg_print(text): #Affiche un message comme s il etait tape
     for char in text:
         sleep(0.01)
         sys.stdout.write(char)
@@ -37,7 +39,7 @@ def print_indir(): #Affiche le contenu du dossier actif.
         print('')
     sleep(1)
         
-def ask_dir(): #Damande et rend actif le repertoire
+def ask_dir(): #Demande et rend actif le repertoire
     place=os.getcwd()
     print(f'Votre position :{place}')
     msg_print('Voulez-vous changer de répertoire [O/N] ?')
@@ -73,7 +75,7 @@ def replace_extension(name, ext_to_replace, replace_caracter):
     return new_name
 
 
-def rename_file(directory) : #Fonctione de renommage, inclu les question
+def rename_file(directory) : #Fonction de renommage, inclu les questions
     msg_print('Voulez-vous remplacer les extensions de fichier [O/N] ?')
     choix_rep_ext=str(input())
     if choix_rep_ext.lower() in yes_answer:
@@ -103,38 +105,63 @@ def rename_file(directory) : #Fonctione de renommage, inclu les question
     clean()
     msg_print_exec('OK ...')
     for file in directory : #Execute les actions demandees
-        if (choix_rep_ext in yes_answer and choix_rep_space in yes_answer) and (' 'in file and ext_to_replace in file) :
+        if (choix_rep_ext.lower() in yes_answer and choix_rep_space.lower() in yes_answer) and (' 'in file and ext_to_replace in file) :
                 file_new_name = str(replace_extension(file, ext_to_replace, replace_caracter))
                 file_last_name = str(replace_space(file_new_name, space_to[number_caracter]))
                 os.rename(file, file_last_name)
                 msg_print(f'{file} --> {file_new_name} --> {file_last_name}\n')
         else :
-            if ext_to_replace in file and choix_rep_ext in yes_answer :
+            if ext_to_replace in file and choix_rep_ext.lower() in yes_answer :
                 file_new_name = str(replace_extension(file, ext_to_replace, replace_caracter))
                 os.rename(file, file_new_name)
                 msg_print(f'{file} --> {file_new_name}\n')
-            if choix_rep_space in yes_answer and ' ' in file :
+            if choix_rep_space.lower() in yes_answer and ' ' in file :
                 file_new_name = str(replace_space(file, space_to[number_caracter]))
                 os.rename(file, file_new_name)
                 msg_print(f'{file} --> {file_new_name}\n')
 
-def sort_by_ext():
+def sort_by_ext(): #Fonction qui déplace les fichiers dans les bons répertoires
+    location=os.getcwd()
+    directory = os.listdir(location)
     print_indir()
-    msg_print('Trier les fichiers et créer des dossiers de rangement dans ce rerpetoire ?')
+    msg_print('Trier les fichiers et créer des dossiers de rangement dans ce rerpetoire : ')
+    msg_print_exec(location)
+    msg_print('Garder ce répertoire de destination [O/N] ?')
     choix_rep_dest=str(input())
-    if choix_rep_dest in yes_answer:
-        rep_dest=os.getcwd()
+    if choix_rep_dest.lower() in yes_answer:
+        rep_dest=location
     else :
         check = False
         while check == False:
             msg_print('Entrez le repertoire de destination :')
             rep_dest=str(input())
-            try:
-                os.path.isdir(rep_dest)
+            if os.path.isdir(rep_dest) == True:
                 check = True
-            except:
+            else:
                 msg_print_error("Le repertoire que vous avez rentré n'est pas valide !", "7")
-            check= False
+                clean()
+                check= False
+    slash=('/' if os.name =='posix' else '\\')
+ 
+    if not rep_dest[:-1].endswith('\\') or not rep_dest[:-1].endswith('/'): #verfie que la destination comporte bien un slash ou un antislash (l ajoute si besoin)
+        rep_dest= rep_dest +  slash
+
+    msg_print_exec('ok ...')
+    for rep_name in rep_sort_name: #Creer les repertoires de trie s il n existe pas.
+        if not os.path.exists(rep_dest+rep_name):
+            os.makedirs(rep_dest+rep_name)
+            msg_print(f'create : {rep_dest}{rep_name}\n')
+            
+            
+    for file in directory:
+        ext = extension(file)
+        if ext in ext_image :
+            shutil.move(location+slash+file, rep_dest+rep_sort_name[0]+slash+file)
+            msg_print(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[0]}{slash}{file}\n')
+        if ext in ext_video :
+            shutil.move(location+slash+file, rep_dest+rep_sort_name[1]+slash+file)
+            msg_print(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[1]}{slash}{file}\n')
+        
     
             
 def extension(name):
@@ -153,8 +180,13 @@ directory = os.listdir(ask_dir()) #On prend les fichiers du repertoire
 msg_print("Voulez-vous renommer des noms de fichiers [O/N] ? ")
 choix_rep_rename=str(input())
 clean()
-if choix_rep_rename in yes_answer:
+if choix_rep_rename.lower() in yes_answer:
     print_indir()
     rename_file(directory)
-else :
-    msg_print('Bonne journée !\n')
+#else :
+    #msg_print('Bonne journée !\n')
+msg_print("Voulez trier vos fichier dans des dossiers (ex: *.png --> images/*.png) [O/N] ?")
+choix_rep_sort=str(input())
+clean()
+if choix_rep_sort.lower() in yes_answer:
+    sort_by_ext()
