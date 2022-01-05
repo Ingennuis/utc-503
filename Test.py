@@ -8,6 +8,9 @@ space_to=['-', '_', '']
 rep_sort_name=['Images', 'Videos', 'Documents', 'Musiques']
 ext_image=['jpeg', 'png', 'jpg', 'gif', 'tiff']
 ext_video=['avi', 'mpg', 'mp4', 'wmv', 'mov', 'flv']
+ext_music=['mp3', 'wav', 'ogg', 'wma', 'mid', 'm4a']
+ext_doc=['doc', 'docx', 'txt', 'odt', 'xls', 'dot', 'dotx','xlsm', 'xlsx', 'pdf' ]
+
 def clean():
     os.system('clear' if os.name =='posix' else 'cls')
         
@@ -146,6 +149,7 @@ def sort_by_ext(): #Fonction qui déplace les fichiers dans les bons répertoire
     if not rep_dest[:-1].endswith('\\') or not rep_dest[:-1].endswith('/'): #verfie que la destination comporte bien un slash ou un antislash (l ajoute si besoin)
         rep_dest= rep_dest +  slash
 
+    clean()
     msg_print_exec('ok ...')
     for rep_name in rep_sort_name: #Creer les repertoires de trie s il n existe pas.
         if not os.path.exists(rep_dest+rep_name):
@@ -161,7 +165,12 @@ def sort_by_ext(): #Fonction qui déplace les fichiers dans les bons répertoire
         if ext in ext_video :
             shutil.move(location+slash+file, rep_dest+rep_sort_name[1]+slash+file)
             msg_print(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[1]}{slash}{file}\n')
-        
+        if ext in ext_doc :
+            shutil.move(location+slash+file, rep_dest+rep_sort_name[2]+slash+file)
+            msg_print(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[2]}{slash}{file}\n')
+        if ext in ext_music :
+            shutil.move(location+slash+file, rep_dest+rep_sort_name[3]+slash+file)
+            msg_print(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[3]}{slash}{file}\n')
     
             
 def extension(name):
