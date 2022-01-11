@@ -6,7 +6,7 @@ from time import sleep
 yes_answer=["o", "y", "oui", "yes"]
 space_to=['-', '_', '']
 rep_sort_name=['Images', 'Videos', 'Documents', 'Musiques']
-ext_image=['jpeg', 'png', 'jpg', 'gif', 'tiff']
+ext_image=['jpeg', 'png', 'jpg', 'gif', 'tiff','bmp']
 ext_video=['avi', 'mpg', 'mp4', 'wmv', 'mov', 'flv']
 ext_music=['mp3', 'wav', 'ogg', 'wma', 'mid', 'm4a']
 ext_doc=['doc', 'docx', 'txt', 'odt', 'xls', 'dot', 'dotx','xlsm', 'xlsx', 'pdf' ]
