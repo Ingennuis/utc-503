@@ -11,10 +11,15 @@ It's script that works in full cli.
 - Choose a working space
 - Replace extension file
 - Replace spaces in file names
-
-
-### *Coming soon :*
 - Change file names by incrmanted names (file_1, file_2 ... file_n)
-- Option to compress files
 - Sort files according to their extension, and put it in the right directory (ex : .png in /Image)
+
+### *Maybe will come soon :*
+
+- Option to compress files
+
+### To do :
+- Send output files to destination folder if not order.
+- Test the code
+- Print stats
 
