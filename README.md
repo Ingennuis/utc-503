@@ -16,20 +16,20 @@ It's script that works in full cli.
 
 ## Usage :
 *Help Output:*
-usage: rename.py [-h] -p PATH [-d DESTINATION] [-s [SPACE_CHARACTER]] [-o] [-ext EXT EXT] [-r] [-v]
+    usage: rename.py [-h] -p PATH [-d DESTINATION] [-s [SPACE_CHARACTER]] [-o] [-ext EXT EXT] [-r] [-v]
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -p PATH, --path PATH  path to your directory
-  -d DESTINATION, --destination-path DESTINATION
-                        choose a destination folder
-  -s [SPACE_CHARACTER], --space-replace [SPACE_CHARACTER]
-                        replace space by underscore or your choice
-  -o, --order-files     organize files in folder acording to their type
-  -ext EXT EXT, --ext-replace EXT EXT
-                        replace a choosen extension file by an other Usage : -ext [ext-to-replace] [replace-ext]
-  -r, --rename          rename all files, file_1, file_2, ..., file_n | image_1...
-  -v, --verbose         show you what was done
+    optional arguments:
+      -h, --help            show this help message and exit
+      -p PATH, --path PATH  path to your directory
+      -d DESTINATION, --destination-path DESTINATION
+                            choose a destination folder
+      -s [SPACE_CHARACTER], --space-replace [SPACE_CHARACTER]
+                            replace space by underscore or your choice
+      -o, --order-files     organize files in folder acording to their type
+      -ext EXT EXT, --ext-replace EXT EXT
+                            replace a choosen extension file by an other Usage : -ext [ext-to-replace] [replace-ext]
+      -r, --rename          rename all files, file_1, file_2, ..., file_n | image_1...
+      -v, --verbose         show you what was done
 
 
 *The space-replace and ext-raplace are useless when the option rename (-r) is used*
