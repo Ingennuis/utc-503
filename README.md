@@ -16,6 +16,7 @@ It's script that works in full cli.
 
 ## Usage :
 *Help Output:*
+
     usage: rename.py [-h] -p PATH [-d DESTINATION] [-s [SPACE_CHARACTER]] [-o] [-ext EXT EXT] [-r] [-v]
 
     optional arguments:
