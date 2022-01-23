@@ -15,7 +15,7 @@ It's script that works in full cli.
 - Sort files according to their extension, and put it in the right directory (ex : .png in /Image)
 
 ## Usage :
-
+*Help Output:*
 usage: rename.py [-h] -p PATH [-d DESTINATION] [-s [SPACE_CHARACTER]] [-o] [-ext EXT EXT] [-r] [-v]
 
 optional arguments:
