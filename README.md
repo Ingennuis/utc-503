@@ -1,10 +1,6 @@
 # utc-503- Imporved File Rename
 School Python Project.
 
-## Test.py
-It's a simple script, that ask you mutiple questions to do some rename and storage functions.
-It's a test script (for fun and tests), it's not the main project : see *rename.py*
-
 ## rename.py
 It's script that works in full cli.
 
