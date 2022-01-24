@@ -40,6 +40,7 @@ It's script that works in full cli.
 
     $ /bin/python3 /home/inge/utc-503/utc-503/rename.py -p /home/inge/test/ -o -r -v
 *Output :*
+
     rename : tableur.xls --> document_1.xls
     rename : monfichiertext.txt --> document_2.txt
     rename : gif.gif --> image_1.gif
