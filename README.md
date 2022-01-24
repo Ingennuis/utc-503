@@ -1,5 +1,6 @@
 # utc-503- Imporved File Rename
 School Python Project.
+The objective of the project is to automate the storage and renaming of files.
 
 ## rename.py
 It's script that works in full cli.
@@ -71,3 +72,8 @@ It's script that works in full cli.
     /home/inge/test/document_1.xls move to --> /home/inge/test/Documents/document_1.xls
     /home/inge/test/document_4.odt move to --> /home/inge/test/Documents/document_4.odt
     Done !
+    
+*For the order and rename functions, when a file isn't identified, it is considered as file. Move to 'Files' folder, or rename as 'file_n.ext'.*
+
+## Author :
+Ingennuis : https://github.com/Ingennuis
