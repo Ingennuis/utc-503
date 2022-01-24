@@ -4,7 +4,7 @@ School Python Project.
 ## rename.py
 It's script that works in full cli.
 
-### The fuctions are :
+### The functions are :
 - Choose a working space
 - Replace extension file
 - Replace spaces in file names
