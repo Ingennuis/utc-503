@@ -45,13 +45,13 @@ def verbose(text): #display changes
     if args.verbose :
         print(f'{text}')
 
-def rename(name, type) : #rename acording to the extension file
+def rename(name, kind) : #rename acording to the extension file
     ext=extension(name)
     if ext :
-        name=f'{type}_{count[type]}.{ext}'
+        name=f'{kind}_{count[kind]}.{ext}'
     else:
-        name=f'{type}_{count[type]}'
-    count[type]=count[type]+1
+        name=f'{kind}_{count[kind]}'
+    count[kind]=count[kind]+1
     return name
 
 def extension(name): #return file's extension
@@ -63,12 +63,12 @@ def create_dir():
     for rep_name in rep_sort_name: #Create folder if not exist
         if not os.path.exists(rep_dest+rep_name) and count[str(rep_name[:-1].lower())] > 1:
             try:
-                os.makedirs(rep_dest+rep_name) 
+                os.makedirs(rep_dest+rep_name)
                 verbose(f'create : {rep_dest}{rep_name}')
             except:
                 print(f'\033[91mError : Impossible to create {rep_dest}{rep_name}\033[0m')
                 sys.exit()
-            
+
 def order_files(): #order file in the right folder
     for file in files:
         ext = extension(file)
@@ -87,20 +87,19 @@ def order_files(): #order file in the right folder
         else:
             shutil.move(f'{location}{slash}{file}', f'{rep_dest}{rep_sort_name[4]}{slash}{file}')
             verbose(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[4]}{slash}{file}')
-            
+ 
 def files_types(ext) : #return file type acording to their extension
     if ext in ext_image:
-        type='image'
+        kind='image'
     elif ext in ext_doc:
-        type='document'
+        kind='document'
     elif ext in ext_video:
-        type='video'
+        kind='video'
     elif ext in ext_music:
-        type='music'
+        kind='music'
     else:
-        type='file'
-    return type
-
+        kind='file'
+    return kind
 
 
 
@@ -112,16 +111,16 @@ directory=os.listdir(location)
 if args.destination: #define destination folder
     destination=args.destination
     if not os.path.isdir(destination) :
-        print(f'\033[91mError : Wrong destination ! Not Folder\033[0m')
+        print('\033[91mError : Wrong destination ! Not Folder\033[0m')
         sys.exit()
 else:
     destination=os.getcwd()
 slash=('/' if os.name =='posix' else '\\')
-if not destination[-1]=='\\' and not destination[-1]=='/':#verify if the the destination have a skash in the end, then add it    
+if not destination[-1]=='\\' and not destination[-1]=='/':#verify if the the destination have a skash in the end, then add it
     rep_dest= destination +  slash
 else:
     rep_dest=destination
-    
+
 for file in directory : #take files to put it in  into dictionary
     if os.path.isfile(file) :
         store_names(file)
@@ -164,9 +163,9 @@ if args.order :
     if not args.rename: #count each type of file, to do not create useless folder
         for file in files:
             ext=extension(file)
-            count[files_types(ext)]=count[files_types(ext)]+1           
+            count[files_types(ext)]=count[files_types(ext)]+1
     create_dir()
     order_files()
-print(f'\033[92mDone !\033[0m')
+print('\033[92mDone !\033[0m')
 
 #count can improve for display statistics
