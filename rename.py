@@ -1,5 +1,7 @@
 #!/bin/python3
-import os, shutil, sys
+import os
+import shutil
+import sys
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -65,7 +67,7 @@ def create_dir():
             try:
                 os.makedirs(rep_dest+rep_name)
                 verbose(f'create : {rep_dest}{rep_name}')
-            except Exception:
+            except :
                 print(f'\033[91mError : Impossible to create {rep_dest}{rep_name}\033[0m')
                 sys.exit()
 
@@ -73,21 +75,21 @@ def order_files(): #order file in the right folder
     for file in files:
         ext = extension(file)
         if ext in ext_image :
-            shutil.move(f'{location}{SLASH}{file}', f'{rep_dest}{rep_sort_name[0]}{SLASH}{file}')
-            verbose(f'{location}{SLASH}{file} move to --> {rep_dest}{rep_sort_name[0]}{SLASH}{file}')
+            shutil.move(f'{location}{slash}{file}', f'{rep_dest}{rep_sort_name[0]}{slash}{file}')
+            verbose(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[0]}{slash}{file}')
         elif ext in ext_video :
-            shutil.move(f'{location}{SLASH}{file}', f'{rep_dest}{rep_sort_name[1]}{SLASH}{file}')
-            verbose(f'{location}{SLASH}{file} move to --> {rep_dest}{rep_sort_name[1]}{SLASH}{file}')
+            shutil.move(f'{location}{slash}{file}', f'{rep_dest}{rep_sort_name[1]}{slash}{file}')
+            verbose(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[1]}{slash}{file}')
         elif ext in ext_doc :
-            shutil.move(f'{location}{SLASH}{file}', f'{rep_dest}{rep_sort_name[2]}{SLASH}{file}')
-            verbose(f'{location}{SLASH}{file} move to --> {rep_dest}{rep_sort_name[2]}{SLASH}{file}')
+            shutil.move(f'{location}{slash}{file}', f'{rep_dest}{rep_sort_name[2]}{slash}{file}')
+            verbose(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[2]}{slash}{file}')
         elif ext in ext_music :
-            shutil.move(f'{location}{SLASH}{file}', f'{rep_dest}{rep_sort_name[3]}{SLASH}{file}')
-            verbose(f'{location}{SLASH}{file} move to --> {rep_dest}{rep_sort_name[3]}{SLASH}{file}')
+            shutil.move(f'{location}{slash}{file}', f'{rep_dest}{rep_sort_name[3]}{slash}{file}')
+            verbose(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[3]}{slash}{file}')
         else:
-            shutil.move(f'{location}{SLASH}{file}', f'{rep_dest}{rep_sort_name[4]}{SLASH}{file}')
-            verbose(f'{location}{SLASH}{file} move to --> {rep_dest}{rep_sort_name[4]}{SLASH}{file}')
- 
+            shutil.move(f'{location}{slash}{file}', f'{rep_dest}{rep_sort_name[4]}{slash}{file}')
+            verbose(f'{location}{slash}{file} move to --> {rep_dest}{rep_sort_name[4]}{slash}{file}')
+
 def files_types(ext) : #return file type acording to their extension
     if ext in ext_image:
         kind='image'
@@ -115,12 +117,11 @@ if args.destination: #define destination folder
         sys.exit()
 else:
     destination=os.getcwd()
-SLASH=('/' if os.name =='posix' else '\\')
+slash=('/' if os.name =='posix' else '\\')
 if not destination[-1]=='\\' and not destination[-1]=='/':#verify if the the destination have a skash in the end, then add it
-    rep_dest= destination +  SLASH
+    rep_dest= destination +  slash
 else:
     rep_dest=destination
-
 for file in directory : #take files to put it in  into dictionary
     if os.path.isfile(file) :
         store_names(file)
@@ -141,15 +142,15 @@ for file in files : #prompt names changes and makes changes
             try :
                 os.rename(file, files[file])
                 verbose(f'rename : {file} --> {files[file]}')
-            except Exception:
+            except :
                 print(f'\033[91mError : Impossible to change {file} --> {files[file]}\033[0m')
                 sys.exit()
         else :
             try :
-                shutil.move(f'{location}{SLASH}{file}', f'{rep_dest}{SLASH}{file}')
-                verbose(f'rename and move : {location}{SLASH}{file} --> {rep_dest}{SLASH}{files[file]}')
-            except Exception:
-                print(f'\033[91mError : Impossible to change or move {location}{SLASH}{file} --> {rep_dest}{SLASH}{files[file]}\033[0m')
+                shutil.move(f'{location}{slash}{file}', f'{rep_dest}{files[file]}')
+                verbose(f'rename and move : {location}{slash}{file} --> {rep_dest}{files[file]}')
+            except :
+                print(f'\033[91mError : Impossible to change or move {location}{slash}{file} --> {rep_dest}{files[file]}\033[0m')
                 sys.exit()
 #***Make the changes in the files names***
 
