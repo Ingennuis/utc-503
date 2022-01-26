@@ -4,6 +4,7 @@ The objective of the project is to automate the storage and renaming of files.
 
 ## rename.py
 It's script that works in full cli.
+Wokrs on Linux and Windows. MacOS not tested.
 
 ### The functions are :
 - Choose a working space
