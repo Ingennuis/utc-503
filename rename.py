@@ -16,9 +16,9 @@ parser.add_argument('-v', '--verbose', help='show you what was done', action='st
 args = parser.parse_args()
 
 #----Variables----
-files={}
+files={} #Can be better
 count={'image':1, 'document':1, 'video':1, 'music':1, 'file':1 }
-ext_image=['jpeg', 'png', 'jpg', 'gif', 'tiff','bmp']
+ext_image=['jpeg', 'png', 'jpg', 'gif', 'tiff','bmp'] #We can use a library to compare type
 ext_video=['avi', 'mpg', 'mp4', 'wmv', 'mov', 'flv']
 ext_music=['mp3', 'wav', 'ogg', 'wma', 'mid', 'm4a']
 ext_doc=['doc', 'docx', 'txt', 'odt', 'xls', 'dot', 'dotx','xlsm', 'xlsx', 'pdf' ]
