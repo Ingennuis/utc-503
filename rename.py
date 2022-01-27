@@ -152,7 +152,7 @@ for file in files : #prompt names changes and makes changes
             except :
                 print(f'\033[91mError : Impossible to change or move {location}{slash}{file} --> {rep_dest}{files[file]}\033[0m')
                 sys.exit()
-#***Make the changes in the files names***
+#***Make the changes in the files names*** Can be put in a function...
 
 if args.order :
     files={}
